@@ -1,11 +1,8 @@
-function greet() {
-  console.log("Hello greetings!");
-}
+let obj = {
+  id: 1,
+};
 
-greet(); // accessing files from same function
+obj.name = "emmanuelkiranr";
+obj.age = 20;
 
-function sayHi() {
-  console.log("Hi :)");
-}
-
-export default { greet, sayHi };
+export default obj;

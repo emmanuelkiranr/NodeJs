@@ -125,6 +125,8 @@ import sec from "./path";
 
 sec.fn_name1();
 
+[Link](https://github.com/emmanuelkiranr/NodeJs/commit/0a9bf7a3b05ea027fbe7fc0dd2cd7955c8d08d61)
+
 4. To display all the fns in the exports object in the form of table
 
 console.table(imp);

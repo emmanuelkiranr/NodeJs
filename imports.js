@@ -1,4 +1,2 @@
 import imp from "./index.js";
-
-imp.greet();
-imp.sayHi();
+console.log(imp);
