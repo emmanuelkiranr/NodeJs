@@ -55,7 +55,7 @@ There are 3 types of modules
 
 ### Exports
 
-To access a function declared in on file from another file, we need to export that fn first. Then we need to import/require it in the other file to access them
+To access a function declared in a file from another file, we need to export that fn first. Then we need to import/require it in the other file to access them
 
 To export a function:
 
@@ -65,6 +65,8 @@ To export a function:
 module.exports = function greet() {
   console.log("Greetings");
 };
+
+This will add the greet fn to the exports obj so we can import it and access from other files
 
 Since this is an interpreted language if there are multiple fns to be exported, in the exports object only the latest fn will be avalible all previous fns will be overwritten
 
