@@ -154,6 +154,16 @@ console.log(imp);
 
 ```
 
+### Writing scripts
+
+In package.json file we can add custom scripts that can be run with the npm cmd
+
+```
+"start": "echo \"Running Node App\" && node imports.js",
+
+run: npm start
+```
+
 ### FileSystem fs
 
 It is a core module to operate on files. Type fs. to see the supported options
@@ -189,7 +199,35 @@ fs.readFile("data.json", (err, data) => {
 
 ```
 
-### To get response from API using core and 3rd party module
+### ReadLine (core module)
+
+<!-- Add call back details -->
+
+```
+import readline from "readline";
+
+// create an Interface to config the read, write stream
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+rl.question("Enter your name: ", (name) => {
+  console.log(`${name}`);
+  rl.close(); // closes the readline interface and emits the close event
+});
+```
+
+We listen to if any event is emitted using the ".on", once the close event is emitted the below code is executed
+
+```
+rl.on("close", function () {
+  console.log(`The msg you entered is displayed above`);
+  process.exit(0);
+});
+```
+
+### To get response from API using core and npm module
 
 ### HTTP (core)
 
@@ -232,14 +270,15 @@ Libraries build by 3rd parties can be used in our project by installing them usi
 
 ```
 npm install pkg_name;
+
+// To uninstall
+npm uninstall pkg_name;
 ```
 
 For dev dependencies (after development they are not needed)
-npm install --save-dev pkg_name;
 
 ```
-
-npm uninstall pkg_name;
+npm install --save-dev pkg_name;
 ```
 
 - Use -g flag for global install/uninstall
@@ -293,4 +332,9 @@ rl.question("Enter the page", function (page) {
 });
 ```
 
-### Writing scripts
+<!-- To do
+- readline module
+both above
+
+- setTimeOut
+- setInterval -->
