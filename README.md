@@ -226,4 +226,71 @@ http.get("https://reqres.in/api/users", (res) => {
 
 (NOTE: The data is received in chunks ie part by part so to display all data at a time append it as soon as it is recived)
 
+### NPM Modules
+
+Libraries build by 3rd parties can be used in our project by installing them using the `npm install` command.
+
+```
+npm install pkg_name;
+```
+
+For dev dependencies (after development they are not needed)
+npm install --save-dev pkg_name;
+
+```
+
+npm uninstall pkg_name;
+```
+
+- Use -g flag for global install/uninstall
+
+The modules of the npm packages will be in the node_modules directory.
+
+### Axios
+
+```
+npm install axios;
+```
+
+This will add the pkg and version details to the package.json file and also to the package-lock.json file - this file is used to install the correct version of the pkgs while other devs run `npm install` in future
+
+```
+import axios from "axios";
+
+axios.get("https://reqres.in/api/users").then(function (res) {
+  console.log(res.data);
+});
+```
+
+Here we use axios instead of http, here the get request returns a promise, so we don't use a callback function like (res) => {} instead we use .then
+
+Ask user which response page is required, then fetch that page and write to a file
+
+```
+import axios from "axios";
+import fs from "fs";
+import readline from "readline";
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+rl.question("Enter the page", function (page) {
+  axios
+    .get(`https://reqres.in/api/users?page=${page}`)
+    .then(function (res) {
+    // To write an object to any file we have to convert it to a string format
+      const json = JSON.stringify(res.data.data);
+
+      if (`${page}` == 1) {
+        fs.writeFileSync("1.json", json);
+      } else {
+        fs.writeFileSync("2.json", json);
+      }
+      rl.close();
+    });
+});
+```
+
 ### Writing scripts
