@@ -156,7 +156,7 @@ console.log(imp);
 
 ### FileSystem fs
 
-It is a core module to operate on files.
+It is a core module to operate on files. Type fs. to see the supported options
 
 ```
 import fs from "fs";
@@ -188,5 +188,42 @@ fs.readFile("data.json", (err, data) => {
 });
 
 ```
+
+### To get response from API using core and 3rd party module
+
+### HTTP (core)
+
+```
+import http from "./https"
+
+http.get("https://reqres.in/api/users", (res) => {
+  let content = "";
+  console.log(res); // not the result but an object
+
+  res.on("data", (data) => {
+    console.log(data.toString());
+  });
+
+  res.on("end", () => {
+    console.log(content);
+  });
+
+  res.on("error", (err) => {
+    console.log("error occured");
+  });
+});
+```
+
+- http.get() - Get method - Sends a get request to the api. (The response will be an object, we can get the data from the data property of the response object)
+<!-- Add call back details -->
+- Once the response is received we pass it as an argument to the function for further processing
+
+- .on method - This method is called when our app receives msg from the server. It is used to perform some operation on the received response object. ["on" receiving the response(data, error etc) do this "fn"]
+
+- data - We take the data from the response for further operation
+- end - On connection end
+- error - When a error occurs in the request like network error etc
+
+(NOTE: The data is received in chunks ie part by part so to display all data at a time append it as soon as it is recived)
 
 ### Writing scripts
