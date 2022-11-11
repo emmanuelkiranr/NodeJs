@@ -23,7 +23,7 @@ Get method - To send a get request to the api. (The response will be an object, 
 
 Once the response is received we pass it as an argument to the function for further processing
 
-.on method - This method is called when our app receives msg from the server. It is used to perform some operation on the received response object
+.on method - This method is used to listen to events when our app receives msg from the server. It is used to perform some operation on the received response object
 
 data - We take the data from the response for further operation
 end - On connection end

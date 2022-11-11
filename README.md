@@ -176,7 +176,7 @@ There are 2 ways to read/write - synchronous and asynchronous.
 
 sync - Program exe is held until the data is received.
 
-async - Program continues its execution, the data retriving process happens in the background. We use a fn with async read/write to get/use the received data.
+async - Program continues its execution, the data fetching process happens in the background. We use a callback fn with async read/write to get/use the received data.
 
 sync write/read
 
@@ -229,7 +229,7 @@ http.get("https://reqres.in/api/users", (res) => {
 <!-- Add call back details -->
 - Once the response is received we pass it as an argument to the function for further processing
 
-- .on method - This method is called when our app receives msg from the server. It is used to perform some operation on the received response object. ["on" receiving the response(data, error etc) do this "fn"]
+- .on method - This method is used to listen to events called when our app receives msg from the server. It is used to perform some operation on the received response object. ["on" receiving the response(data, error etc) do this "fn"]
 
 - data - We take the data from the response for further operation
 - end - On connection end
@@ -333,3 +333,6 @@ console.log("emmanuelkiranr");
 
 - In case of setTimeout the delay represents after how much time the fn is to be put into stack
 - In case of setInterval the delay represents the time interval after which the fn should be put into stack(repeatedly put into stack after each delay)
+
+<!-- Todo
+callback and promise -->
