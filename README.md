@@ -287,29 +287,20 @@ Here we use axios instead of http, here the get request returns a promise, so we
 Ask user which response page is required, then fetch that page and write to a file
 
 ```
+
 import axios from "axios";
 import fs from "fs";
-import readline from "readline";
+import rls from "readline-sync";
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+let page = rls.question("Enter page num: ");
 
-rl.question("Enter the page", function (page) {
-  axios
-    .get(`https://reqres.in/api/users?page=${page}`)
-    .then(function (res) {
-    // To write an object to any file we have to convert it to a string format
-      const json = JSON.stringify(res.data.data);
-
-      if (`${page}` == 1) {
-        fs.writeFileSync("1.json", json);
-      } else {
-        fs.writeFileSync("2.json", json);
-      }
-      rl.close();
-    });
+axios.get(`https://reqres.in/api/users?page=${page}`).then((res) => {
+  let json = JSON.stringify(res.data.data);
+  if (`${page}` == 1) {
+    fs.writeFileSync("./json/one.json", json);
+  } else {
+    fs.writeFileSync("./json/two.json", json);
+  }
 });
 ```
 
