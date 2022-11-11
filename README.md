@@ -140,6 +140,7 @@ file1.js
 
 let obj = {
   id: 1,
+  email: null
 };
 
 obj.name = "emmanuelkiranr";
@@ -332,9 +333,32 @@ rl.question("Enter the page", function (page) {
 });
 ```
 
-<!-- To do
-- readline module
-both above
+### Sync and Async
 
-- setTimeOut
-- setInterval -->
+- Sync - one after other
+- Async - multiple tasks done in the background
+  Async is used in situations where a delay is expected(use wisely), eg of delay occurance tasks: console.log, I/O, fetch data from a server, write to disk
+  NOTE: 3 ways to make a fn async - async, promise, set
+
+Example replicating an asnc operation using setTimeout/setInterval
+
+```
+console.log("Emmaneul Kiran R");
+setTimeout(() => {
+  console.log("Age: 22");
+}, 1000); // we know this statement has delay so we make it async using
+console.log("emmanuelkiranr");
+```
+
+All the sync statements are put into the call stact, executed and removed from it, but whenever the program sees an async fn, it puts it into an event loop and only after the call stack is completely empty[ie no more sync fns to be put into call stack], the async fn is put into the call stack and executed[if there is any delay then the fn is put into the stack only after the delay].
+
+```
+console.log("Emmaneul Kiran R");
+setInterval(() => {
+  console.log("Age: 22");
+}, 1000);
+console.log("emmanuelkiranr");
+```
+
+- In case of setTimeout the delay represents after how much time the fn is to be put into stack
+- In case of setInterval the delay represents the time interval after which the fn should be put into stack(repeatedly put into stack after each delay)
