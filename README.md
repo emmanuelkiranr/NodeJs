@@ -200,34 +200,6 @@ fs.readFile("data.json", (err, data) => {
 
 ```
 
-### ReadLine (core module)
-
-<!-- Add call back details -->
-
-```
-import readline from "readline";
-
-// create an Interface to config the read, write stream
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-
-rl.question("Enter your name: ", (name) => {
-  console.log(`${name}`);
-  rl.close(); // closes the readline interface and emits the close event
-});
-```
-
-We listen to if any event is emitted using the ".on", once the close event is emitted the below code is executed
-
-```
-rl.on("close", function () {
-  console.log(`The msg you entered is displayed above`);
-  process.exit(0);
-});
-```
-
 ### To get response from API using core and npm module
 
 ### HTTP (core)
@@ -285,6 +257,14 @@ npm install --save-dev pkg_name;
 - Use -g flag for global install/uninstall
 
 The modules of the npm packages will be in the node_modules directory.
+
+### readline-sync
+
+```
+import rls from "readline-sync"
+
+let name = question("Enter your name");
+```
 
 ### Axios
 

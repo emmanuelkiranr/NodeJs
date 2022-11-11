@@ -12,5 +12,8 @@
   "license": "MIT",
   "devDependencies": {
     "axios": "^1.1.3"
+  },
+  "dependencies": {
+    "readline-sync": "^1.4.10"
   }
 }
