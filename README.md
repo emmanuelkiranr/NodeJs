@@ -125,7 +125,6 @@ import sec from "./path";
 
 sec.fn_name1();
 
-[Link](https://github.com/emmanuelkiranr/NodeJs/commit/0a9bf7a3b05ea027fbe7fc0dd2cd7955c8d08d61)
 
 4. To display all the fns in the exports object in the form of table
 
@@ -154,6 +153,8 @@ import imp from "./index.js";
 console.log(imp);
 
 ```
+
+[Link](https://github.com/emmanuelkiranr/NodeJs/commit/0a9bf7a3b05ea027fbe7fc0dd2cd7955c8d08d61)
 
 ### Writing scripts
 
@@ -261,6 +262,7 @@ The modules of the npm packages will be in the node_modules directory.
 ### readline-sync
 
 ```
+// npm install readline-sync;
 import rls from "readline-sync"
 
 let name = question("Enter your name");
@@ -303,36 +305,3 @@ axios.get(`https://reqres.in/api/users?page=${page}`).then((res) => {
   }
 });
 ```
-
-### Sync and Async
-
-- Sync - one after other
-- Async - multiple tasks done in the background
-  Async is used in situations where a delay is expected(use wisely), eg of delay occurance tasks: console.log, I/O, fetch data from a server, write to disk
-  NOTE: 3 ways to make a fn async - async, promise, set
-
-Example replicating an asnc operation using setTimeout/setInterval
-
-```
-console.log("Emmaneul Kiran R");
-setTimeout(() => {
-  console.log("Age: 22");
-}, 1000); // we know this statement has delay so we make it async using
-console.log("emmanuelkiranr");
-```
-
-All the sync statements are put into the call stact, executed and removed from it, but whenever the program sees an async fn, it puts it into an event loop and only after the call stack is completely empty[ie no more sync fns to be put into call stack], the async fn is put into the call stack and executed[if there is any delay then the fn is put into the stack only after the delay].
-
-```
-console.log("Emmaneul Kiran R");
-setInterval(() => {
-  console.log("Age: 22");
-}, 1000);
-console.log("emmanuelkiranr");
-```
-
-- In case of setTimeout the delay represents after how much time the fn is to be put into stack
-- In case of setInterval the delay represents the time interval after which the fn should be put into stack(repeatedly put into stack after each delay)
-
-<!-- Todo
-callback and promise -->
