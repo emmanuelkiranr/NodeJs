@@ -1,8 +1,67 @@
+## Callback and Promise
+
+### Basic function props:
+
+We can assign a named or annonymous fn to a variable and call it using the variable name
+
+```
+let greet = function myName(name) {
+  console.log(name);
+};
+greet();
+```
+
+Passing fn as parameter
+
+```
+function cb(func) {
+  func();
+}
+
+cb(function () {
+  // fn without a name, anonymous fn
+  console.log("123");
+});
+```
+
+The fn call cb passes its parameter fn to its fn definition ie to func, so inside the definition if we need to call the fn, we only need to use the parma name as fn call, It would search for its fn definition which is in the fn call cb and executes it
+
+Example:
+
+```
+function icecream(makeicecream, flavour) {
+  makeicecream(flavour);
+}
+
+icecream(function (flav) {
+  console.log(`${flav} flavoured icecream`);
+}, "kiwi");
+```
+
+- Firstly fn call is executed ie icecream
+- The first arg, the anom fn is put into makeicecream and the second arg kiwi is put into the flavour param of the fn definition of icecream
+- Now makeicecream has the anom fn's definition so now we can use makeicecream as a fn call to execute that anom fn by passing in the flavour kiwi as argument
+
+Example: working of setTimeout
+
+```
+function settimeout(func, delay) { //imagine this is the fn definition of setTimeout
+  if (delay == 0) {
+    func();
+  } else {
+    delay--;
+  }
+}
+
+setTimeout(function () {
+  console.log("something");
+}, 0);
+```
+
 ### Sync and Async
 
-- Sync - one after other
-- Async - multiple tasks done in the background
-  Async is used in situations where a delay is expected(use wisely), eg of delay occurance tasks: console.log, I/O, fetch data from a server, write to disk
+- Sync - one after other (Directly put into call stack in the execution context)
+- Async - (put into the event loop until call stack is free) Async is used in situations where a delay is expected(use wisely), eg of delay occurance tasks: console.log, I/O, fetch data from a server, write to disk
 
   (NOTE: 3 ways to make a fn async - async, promise, set)
 
