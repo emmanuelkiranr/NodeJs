@@ -263,9 +263,11 @@ The modules of the npm packages will be in the node_modules directory.
 
 ```
 // npm install readline-sync;
-import rls from "readline-sync"
+let name = rls.question("Enter your name ");
+let age = rls.questionInt("Enter your age");
 
-let name = question("Enter your name");
+console.log(name);
+console.log(age);
 ```
 
 ### Axios
