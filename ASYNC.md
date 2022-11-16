@@ -8,7 +8,14 @@ We can assign a named or annonymous fn to a variable and call it using the varia
 let greet = function myName(name) {
   console.log(name);
 };
-greet();
+
+or
+
+let greet = (name) => {
+  console.log(name);
+};
+
+greet("Hello");
 ```
 
 Passing fn as parameter
@@ -180,6 +187,7 @@ function prom() {
   });
 }
 
+// execution starts here
 prom()
   .then((msg) => {
     console.log(msg);
@@ -187,6 +195,12 @@ prom()
   .catch((msg) => {
     console.log(msg);
   });
+
+  <------->
+
+  imagine
+  let res = (msg) => {console.log(msg)};
+  res("success");
 ```
 
 - The promise once defined is in a pending state and we have to define a callback called an executer which takes 2 vars res and rej that decides when to resolve or rej the promise.
@@ -201,3 +215,5 @@ Here then is the success callback so the var msg is the result of what is resolv
 then res will be the resultant of the get request. we can use that result in the then statement for further processing
 
 So basically the res will call the then and the rej will call catch method see eg: [here](https://github.com/emmanuelkiranr/NodeJs/blob/main/callProm.js)
+
+example: [one](https://github.com/emmanuelkiranr/NodeJs/blob/main/promise.js), [two](https://github.com/emmanuelkiranr/NodeJs/blob/main/promise2.js)
