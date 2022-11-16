@@ -38,18 +38,27 @@ The fn call cb passes its parameter fn to its fn definition ie to func, so insid
 Example:
 
 ```
-function icecream(makeicecream, flavour) {
-  makeicecream(flavour);
+function icecream(makeicecream, flavour, flavours) {
+  setTimeout(() => {
+    makeicecream(flavour);
+  }, flavours.kiwi);
 }
+const flavours = { kiwi: 6000, pineapple: 7000 };
 
-icecream(function (flav) {
-  console.log(`${flav} flavoured icecream`);
-}, "kiwi");
+icecream(
+  function (flavour, flavours) {
+    console.log(`${flavour} flavoured icecream`);
+  },
+  "kiwi",
+  flavours
+);
+
 ```
 
 - Firstly fn call is executed ie icecream
 - The first arg, the anom fn is put into makeicecream and the second arg kiwi is put into the flavour param of the fn definition of icecream
-- Now makeicecream has the anom fn's definition so now we can use makeicecream as a fn call to execute that anom fn by passing in the flavour kiwi as argument
+- Now makeicecream has the anom fn's definition so now we can use makeicecream as a fn call to execute that anom fn by passing in the flavour kiwi as argument.
+- To mimic the async situation we use setTimeout whose second arg is passed and accessed from the object
 
 Example: working of setTimeout
 
