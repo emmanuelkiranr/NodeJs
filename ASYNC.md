@@ -18,13 +18,15 @@ function cb(func) {
   func();
 }
 
+// If fn cb was stored in another variable like above then the below code won't work
+
 cb(function () {
   // fn without a name, anonymous fn
   console.log("123");
 });
 ```
 
-The fn call cb passes its parameter fn to its fn definition ie to func, so inside the definition if we need to call the fn, we only need to use the parma name as fn call, It would search for its fn definition which is in the fn call cb and executes it
+The fn call cb passes its parameter fn to its fn definition ie to func, so inside the definition if we need to call the fn, we only need to use the param name as fn call(since we assigned that fn to the param variable), It would search for its fn definition which is in the fn call cb and executes it
 
 Example:
 
@@ -90,7 +92,7 @@ console.log("emmanuelkiranr");
 
 ### Callback
 
-Callback is a fn that is passed into another fn and called inside it, to complete some action and then be used later used by the outer fn when a condition is met [in below eg the condition is delay]
+Callback is a fn that is passed into another fn and called inside it, to complete some action and then be used later by the outer fn when a condition is met [in below eg the condition is delay]
 
 How callback works:
 
@@ -136,7 +138,63 @@ setTimeout(() => set(() => set1(args_ifAny), 2000)
 #### else
 
 ```
-setTimeout(set);
+setTimeout(set, 2000);
 ```
 
 Here while passing set as arg to executeTask the fn body of set is being passed so in setTimeout fn the set arg represents the entire set fn
+
+### Promise
+
+```
+console.log(1);
+
+setTimeout(() => {
+  let name = "emmanuel";
+  console.log(name);
+}, 2000);
+
+console.log(2);
+```
+
+Here we mimic an async use case using setTimeout method, which takes a callback fn as argument & a time.
+
+- Consider a scenario where the callback is fetching huge data from database and also have to process this data to pass it to the below code statements(these statements are sync).
+- In this case we can write nested callbacks where the response of first callback is send to the callback nested below it, which processes this response and passes it to the next callback inside and so on.
+- This is called callback hell. This is slower and if any error occurs anywhere then the entire nested callbacks will fail and the code itself will fail.
+- To avoid this problem we use promise.
+
+The promise is an object (console log it), representing the completion or rejection of the async operation
+[I promise to get back to you asap].
+
+The promise has 2 results, either it is completed ie resolved or it is failed ie rejected
+
+```
+function prom() {
+  return new Promise((res, rej) => {
+    let name = "emmanuelkiranr";
+    if (name === "emmanuelkiranr") {
+      res("Success");
+    } else {
+      rej("failed");
+    }
+  });
+}
+
+prom()
+  .then((msg) => {
+    console.log(msg);
+  })
+  .catch((msg) => {
+    console.log(msg);
+  });
+```
+
+The Promise obj takes in one parameter a fn (callback) which takes in 2 vars res and rej then we create the fn definition.
+In the fn defintion we say what the promise does and if its successful then it resolves it else it rejects it.
+
+To interact with promises we use .then, anything inside .then is going to run for resolve, and anything inside rej will run for catch
+
+Here then is the success callback so the var msg is the result of what is resolved .So if we are fetching data from api
+then res will be the resultant of the get request. we can use that result in the then statement for further processing
+
+So basically the res will call the then and the rej will call catch method see eg: (here)[]
