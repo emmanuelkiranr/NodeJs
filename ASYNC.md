@@ -189,12 +189,15 @@ prom()
   });
 ```
 
-The Promise obj takes in one parameter a fn (callback) which takes in 2 vars res and rej then we create the fn definition.
-In the fn defintion we say what the promise does and if its successful then it resolves it else it rejects it.
+- The promise once defined is in a pending state and we have to define a callback called an executer which takes 2 vars res and rej that decides when to resolve or rej the promise.
 
-To interact with promises we use .then, anything inside .then is going to run for resolve, and anything inside rej will run for catch
+- The consumer uses the .then method which waits for the async value to be fulfilled, once fulfilled we'll call the fn(inside then) and pass this value as an argument.
+
+- We fulfill the promise by calling resolve, if error we use reject to process .catch method
+
+- To process regardless of the both above possibilities we use .finally()
 
 Here then is the success callback so the var msg is the result of what is resolved .So if we are fetching data from api
 then res will be the resultant of the get request. we can use that result in the then statement for further processing
 
-So basically the res will call the then and the rej will call catch method see eg: (here)[]
+So basically the res will call the then and the rej will call catch method see eg: [here](https://github.com/emmanuelkiranr/NodeJs/blob/main/callProm.js)
