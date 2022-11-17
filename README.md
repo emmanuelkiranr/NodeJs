@@ -29,8 +29,28 @@ To get details of all the objects type:
 ```
 console.log(global);
 
+// similar to window object in browser
+```
+
+Methods like setTimeout and all are part of global object so we don't have to exciplitely type global.setTimeout()
+
 Process gives us access to the platform we run the application
+
+```
 console.log(process);
+
+// similar to document in browser
+```
+
+### Directory and File name
+
+Only works in commanJs so use the file extension cjs
+(NOTE: Similarly for other situations to use ES6 use file extension .mjs)
+
+```
+console.log(___dirname); - absolute path of current folder the file is in
+
+console.log(___filename); - absolute path of current folder with the file name
 ```
 
 ## Modules
@@ -107,6 +127,14 @@ module.exports = {
   greet,   - if the key and value names are same then just pass the value
   sayHi, - putting bracket will actually call the function
 };
+
+2.2 Destructuring - import multiple different things from a file
+
+const age = [10, 20, 34];
+const people = [bla, bla, ..]
+
+const {age, people} = require(./path);
+// Has to be same name as the exporting thing
 
 3. In new versions of node to export a fn from a file we use the export keyword,
 For that add "type": "module" in package.json
@@ -199,7 +227,15 @@ fs.readFile("data.json", (err, data) => {
   console.log(data);
 });
 
+other cmds
+
+fs.mkdir("./path", (err) => {});
+fs.rmdir("./path", (err) => {});
+fs.existsSync("path")
+fs.unlink("./path", (err) => {}) // delete file
 ```
+
+To combact the issues of asynchronous reading we use streams [here](link)
 
 ### To get response from API using core and npm module
 
