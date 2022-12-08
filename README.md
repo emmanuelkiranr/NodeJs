@@ -44,13 +44,22 @@ console.log(process);
 
 ### Directory and File name
 
-Only works in commanJs so use the file extension cjs
-(NOTE: Similarly for other situations to use ES6 use file extension .mjs)
+Only works in commanJs so use the 2nd method in ES6
 
 ```
 console.log(___dirname); - absolute path of current folder the file is in
 
 console.log(___filename); - absolute path of current folder with the file name
+```
+
+2nd method (ES6)
+
+```
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 ```
 
 ## Modules
@@ -205,7 +214,7 @@ There are 2 ways to read/write - synchronous and asynchronous.
 
 sync - Program exe is held until the data is received.
 
-async - Program continues its execution, the data fetching process happens in the background. We use a callback fn with async read/write to get/use the received data.
+async - Program execution is held until all thes sync code is executed, until then the program is put into event loop after that it is put to the call stack. We use a callback fn with async read/write to get/use the received data.
 
 sync write/read
 
@@ -220,7 +229,7 @@ async read/write
 fs.writeFile("data-async.json", string, () => {
   console.log("File saved successfully");
 });
-// any below code will be executed while the writeFile is executed in the background. When writeFile completes its exe the fn here is called.
+// any below code will be executed
 
 
 fs.readFile("data.json", (err, data) => {
@@ -235,7 +244,7 @@ fs.existsSync("path")
 fs.unlink("./path", (err) => {}) // delete file
 ```
 
-To combact the issues of asynchronous reading we use streams [here](link)
+To combact the issues of asynchronous reading we use streams [here](https://github.com/emmanuelkiranr/NodeJs/blob/main/streams.js)
 
 ### To get response from API using core and npm module
 
