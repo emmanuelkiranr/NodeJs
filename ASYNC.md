@@ -117,6 +117,8 @@ process.on("exit", () => { - The callback is triggered only when the exit event 
 });
 ```
 
+Using setTimeout and setInterval to see the completion of a async process in the form of progress bar [code](https://github.com/emmanuelkiranr/NodeJs/blob/main/set.js)
+
 ### Callback
 
 Callback is a fn that is passed into another fn and called inside it, to complete some action and then be used later by the outer fn when a condition is met [in below eg the condition is delay]
