@@ -1,4 +1,6 @@
-// Streams allow us to start using the data, before it is finished loading
+// Streams allow us to start using the data, before it is finished loading.
+// ie even before the data is read/written we can start executing the callback fn which otherwise would only execute once the
+// data is completely read/written
 
 /*
 The read/fetched data is returned to the client from the server in small packets called buffer, once a buffer is filled it
@@ -9,6 +11,11 @@ streaming platforms works. Instead of read/fetching all data at once they receiv
 import fs from "fs";
 
 const readStream = fs.createReadStream("./dummy.txt", { encoding: "utf-8" }); // The file will be automatically in readable format
+// without sterm this is like:
+// fs.readFileSync("./dummy.txt", "utf-8", (err, data) => {
+//   console.log(data);
+// });
+
 const writeStream = fs.createWriteStream("./dummy2.txt");
 
 // we are listening to data event using the .on method which is an event listener

@@ -347,7 +347,7 @@ fs.unlink("./path", (err) => {
   } else {
     console.log("Deleted Files")
   }
-}) // delete file
+}) // delete file also - fs.unlinkSync("filename)
 ```
 
 ```
@@ -364,6 +364,8 @@ fs.readdir("./", (err, dir) => {
 ```
 
 To combact the issues of asynchronous reading we use streams [here](https://github.com/emmanuelkiranr/NodeJs/blob/main/streams.js)
+
+prog - Writing users questions and answers to another file using write stream [code](https://github.com/emmanuelkiranr/NodeJs/blob/main/readline-sync.js)
 
 ### To get response from API using core and npm module
 
