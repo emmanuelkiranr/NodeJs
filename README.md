@@ -288,38 +288,79 @@ It is a core module to operate on files. Type fs. to see the supported options
 ```
 import fs from "fs";
 
-There are 2 ways to read/write - synchronous and asynchronous.
+There are 2 ways to read/write - synchronous and asynchronous/blocking and non-blocking
 
-sync - Program exe is held until the data is received.
+sync - process exe is held until the data is received.
 
-async - Program execution is held until all thes sync code is executed, until then the program is put into event loop after that it is put to the call stack. We use a callback fn with async read/write to get/use the received data.
+async - process is put into event loop until all sync process completes their exe, after that it is put to the call stack. We use a callback fn with async read/write to get/use the received data.
 
 sync write/read
 
-fs.writeFileSync("data.json", "string");
-// any below code will not be executed until this writeFileSync completes its execution
+fs.writeFileSync("data.json", "string"); - all below code waits until this process is completed
 
 var content = fs.readFileSync("data.json");
-console.log(content); // returns a buffer so use.toString();
+console.log(content); // returns a buffer so use.toString(); or mention the text encoding fmt - "UTF-8"
 
 async read/write
 
 fs.writeFile("data-async.json", string, () => {
   console.log("File saved successfully");
-});
-// any below code will be executed
+}); - any below code will be executed
 
-
-fs.readFile("data.json", (err, data) => {
-  console.log(data);
+fs.readFile("data.json", "UTF-8", (err, data) => {
+  console.log(data); - This data in callback is similar to writing let data = fs.readFileSync("data.json"); in sync reading. In async the data is received inside the callback
 });
 
 other cmds
 
-fs.mkdir("./path", (err) => {});
-fs.rmdir("./path", (err) => {});
-fs.existsSync("path")
-fs.unlink("./path", (err) => {}) // delete file
+Make a directory if it doesn't exist
+
+if (fs.existsSync("NodeDir")) {
+  console.log("Folder already exist");
+} else {
+  fs.mkdir("NodeDir", (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Directory created successfully");
+    }
+  });
+}
+
+renaming/ moving files
+
+fs.renameSync("testing.js", "test.js"); // similar to folder as well - specify the path
+
+fs.rename("json/file.js", "../Node/file.js", (err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("File moved successfully");
+  }
+});
+
+fs.rmdir("./path", (err) => {}); - delete empty directory
+
+fs.unlink("./path", (err) => {
+  if(err){
+    console.log(err)
+  } else {
+    console.log("Deleted Files")
+  }
+}) // delete file
+```
+
+```
+To list the directories
+let dir = fs.readdirSync("./");
+console.log(dir);
+
+fs.readdir("./", (err, dir) => {
+  if (err) {
+    throw err;
+  }
+  console.log(dir);
+}); - async reading is better since it allows us to do other things while this is happening
 ```
 
 To combact the issues of asynchronous reading we use streams [here](https://github.com/emmanuelkiranr/NodeJs/blob/main/streams.js)
