@@ -103,6 +103,8 @@ To extract filename:
 
 import path from "path";
 console.log(`The file name is ${path.basename(__filename)}`);
+
+To join multiple path - path.join(__dirname, "path 1", "path 2")
 ```
 
 2nd method (ES6)
@@ -114,6 +116,29 @@ import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 ```
+
+```
+import util from "util"; - to log details like timestamp
+
+utils.log(path.basename(__filename));
+
+import v8 from "v8"; - to get info of the memory used etc
+
+uitl.log(v8.getHeapStatistics());
+```
+
+## Event Emitter
+
+```
+import events from "events";
+
+let emitter = new events.EventEmitter();
+```
+
+[code](https://github.com/emmanuelkiranr/NodeJs/blob/main/eventEmitter.js)
+
+Program to get user input to multiple questions using readline and separate the logic into diffeernt module and also emit an event when the user answers an question.
+[code](https://github.com/emmanuelkiranr/NodeJs/blob/main/test.js)
 
 ## Modules
 
