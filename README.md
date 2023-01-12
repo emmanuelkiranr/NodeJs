@@ -22,34 +22,87 @@ author - emmanuelkiranr
 license - ISC
 ```
 
-Once set up a package.json file will be generated with all the project details
+Once set up a package.json file will be generated with all the project & dependency package details
 
-To get details of all the objects type:
+In node we have global object (which is similar to the window object in browser):
 
 ```
 console.log(global);
 
-// similar to window object in browser
+for (let key in global) {
+  console.log(key);
+}
+
+output - key
+
+global
+queueMicrotask
+clearImmediate
+setImmediate
+structuredClone
+clearInterval
+clearTimeout
+setInterval
+setTimeout
+atob
+btoa
+performance
+fetch
 ```
 
 Methods like setTimeout and all are part of global object so we don't have to exciplitely type global.setTimeout()
 
-Process gives us access to the platform we run the application
+Process gives us access to the platform we run the application (similar to document object in browser)
 
 ```
 console.log(process);
 
-// similar to document in browser
+console.log(process.argv);
+
+output - node global
+[ '/usr/local/bin/node', '/Users/emmanuel/Documents/MERN/Node/global' ]
+// location of node, location of the file
+
+output - node global --user Emmanuel --age 23
+
+[
+  '/usr/local/bin/node',
+  '/Users/emmanuel/Documents/MERN/Node/global',
+  '--user',
+  'Emmanuel',
+  '--age',
+  '23'
+]
+
+To extract the value of flags using process.arg
+
+function extract(flag) {
+  let postindexof = process.argv.indexOf(flag) + 1;
+  return process.argv[postindexof];
+}
+
+const user = extract("--user");
+const age = extract("--age");
+
+console.log(user);
+console.log(age);
 ```
+
+using stdout and stdin with process [code](https://github.com/emmanuelkiranr/NodeJs/blob/main/readline-sync.js)
 
 ### Directory and File name
 
-Only works in commanJs so use the 2nd method in ES6
+Only works in commanJs so use the 2nd method in ES6 - Used to import other code into our files
 
 ```
 console.log(___dirname); - absolute path of current folder the file is in
 
 console.log(___filename); - absolute path of current folder with the file name
+
+To extract filename:
+
+import path from "path";
+console.log(`The file name is ${path.basename(__filename)}`);
 ```
 
 2nd method (ES6)

@@ -104,7 +104,18 @@ console.log("emmanuelkiranr");
 ```
 
 - In case of setTimeout the delay represents after how much time the fn is to be put into stack
-- In case of setInterval the delay represents the time interval after which the fn should be put into stack(repeatedly put into stack after each delay)
+- In case of setInterval the delay represents the time interval after which the fn should be put into stack(repeatedly put into stack after each delay) [To clear an interval use clearInterval]
+
+Another way to work with node sync is using the event listner
+
+```
+process.on("exit", () => { - The callback is triggered only when the exit event happens
+  process.stdout.write("\n\n");
+  process.stdout.write(
+    `Name: ${answers[0]}\nAge: ${answers[1]}\nJob: ${answers[2]}`
+  );
+});
+```
 
 ### Callback
 
