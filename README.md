@@ -281,6 +281,8 @@ In package.json file we can add custom scripts that can be run with the npm cmd
 run: npm start
 ```
 
+npx - to run executables
+
 ### FileSystem fs
 
 It is a core module to operate on files. Type fs. to see the supported options
@@ -424,6 +426,20 @@ npm install --save-dev pkg_name;
 - Use -g flag for global install/uninstall
 
 The modules of the npm packages will be in the node_modules directory.
+
+To check if there's any outdated package in our directory/project
+`npm outdated` use -g for global pkgs. Then run npm install on that package to update it.
+
+The ^ symbol means any installing that dependency will be installing the latest version of minor and patch for that particular major update
+The ~ " " latest version of the path for that particular major and minor update
+Remove both to install the exact version.
+
+Npm keeps a cache of our installed modules: `npm cache verify`
+To clean it: `npm cache clean`.
+
+Npm audit - automatically runs to make sure the packages we install are safe `npm audit`
+
+If there is any issue run `npm audit --fix` of look at the audit and do `npm i` for each pkg one by one to find out which is causing the issue
 
 ### readline-sync
 
