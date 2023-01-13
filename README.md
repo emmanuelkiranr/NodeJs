@@ -373,6 +373,8 @@ prog - Writing users questions and answers to another file using write stream [c
 
 ### HTTP (core)
 
+HTTP - to request to sites without security certificates, HTTPS - request to sites with certificates
+
 ```
 import http from "./https"
 
@@ -405,6 +407,27 @@ http.get("https://reqres.in/api/users", (res) => {
 - error - When a error occurs in the request like network error etc
 
 (NOTE: The data is received in chunks ie part by part so to display all data at a time append it as soon as it is recived)
+
+### HTTPS module
+
+```
+const url = "https://en.wikipedia.org/wiki/Earth";
+
+const request = https.get(url, (res) => {
+
+  let response = fs.createWriteStream("./json/https.html"); -  since data is received in chunks use writestream
+
+  console.log(res); - eventhough res is an object when we write it its automatically in the correct data format
+
+  res.pipe(response); - since we are writing the same data to the file without any modification we can use `pipe`
+
+  res.on("end", () => {
+    console.log("File saved successfully");
+  });
+});
+
+request.end();
+```
 
 ### NPM Modules
 
