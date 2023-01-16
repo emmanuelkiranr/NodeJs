@@ -434,7 +434,7 @@ request.end();
 Libraries build by 3rd parties can be used in our project by installing them using the `npm install` command.
 
 ```
-npm install pkg_name;
+npm i pkg_name;
 
 // To uninstall
 npm uninstall pkg_name;
@@ -444,6 +444,10 @@ For dev dependencies (after development they are not needed)
 
 ```
 npm install --save-dev pkg_name;
+
+or
+
+npm i pkg_name -D;
 ```
 
 - Use -g flag for global install/uninstall
@@ -462,7 +466,10 @@ To clean it: `npm cache clean`.
 
 Npm audit - automatically runs to make sure the packages we install are safe `npm audit`
 
-If there is any issue run `npm audit --fix` of look at the audit and do `npm i` for each pkg one by one to find out which is causing the issue
+If there is any issue run `npm audit --fix` of look at the audit and do `npm i` for each pkg one by one to find out which is causing the issue.
+
+If we remove any unwanted packages directly from package.json, it's dependencies will still be available in node_modules.
+check it using `npm ls`, it'll show extraneous for such packages. So to make the node_modules match our package.json run `npm prune`
 
 ### readline-sync
 

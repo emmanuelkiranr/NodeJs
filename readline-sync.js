@@ -48,7 +48,7 @@ process.stdin.on("data", (data) => {
 });
 
 process.on("exit", () => {
-  writeStream.close();
+  writeStream.close(); // dont forget to close the stream
   process.stdout.write("\n\n");
   process.stdout.write(
     `Name: ${answers[0]}\nAge: ${answers[1]}\nJob: ${answers[2]}`
