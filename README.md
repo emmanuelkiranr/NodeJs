@@ -287,14 +287,14 @@ npx - to run executables
 
 It is a core module to operate on files. Type fs. to see the supported options
 
-```
-import fs from "fs";
-
 There are 2 ways to read/write - synchronous and asynchronous/blocking and non-blocking
 
 sync - process exe is held until the data is received.
 
 async - process is put into event loop until all sync process completes their exe, after that it is put to the call stack. We use a callback fn with async read/write to get/use the received data.
+
+```
+import fs from "fs";
 
 sync write/read
 
@@ -363,6 +363,22 @@ fs.readdir("./", (err, dir) => {
   }
   console.log(dir);
 }); - async reading is better since it allows us to do other things while this is happening
+```
+
+To use async await with async filesystem instead of the callback use `util.promisify`
+
+```
+import fs from "fs";
+import util from "util";
+
+const fsreadFile = util.promisify(fs.readFile);
+
+...
+// inside async function
+const data = await fsreadfile(filepath);
+
+// instead of
+fsreadfile(filepath, (err, data) => {})
 ```
 
 To combact the issues of asynchronous reading we use streams [here](https://github.com/emmanuelkiranr/NodeJs/blob/main/streams.js)
