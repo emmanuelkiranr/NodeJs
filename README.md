@@ -535,3 +535,70 @@ axios.get(`https://reqres.in/api/users?page=${page}`).then((res) => {
   }
 });
 ```
+
+## Stream
+
+Build a node app to scrap a web file
+
+```
+import https from "https";
+import fs from "fs";
+
+https.get("https://letsencrypt.org/", (res) => {
+  let writestream = fs.createWriteStream("./test.html");
+  res.pipe(writestream); -  we are NOT waiting to receive the entire response before writing it
+  res.on("end", () => {
+    console.log("Data saved successfully");
+  });
+}); - since we are writing the same data that we write use pipe
+```
+
+We receive data from the response as small chunks, if we are reading/ writing this response using readFile/writeFile sync/async
+then we have to wait until all the chunks are received from the response before we can operate on this response.
+
+To overcome this we use streams, now we can start operating on the response even before we fully receive all the response.
+
+To operate on a file even when it haven't fully read/ (still reading data form res/another file) the data/res, use createReadStream
+Make that file use createReadStream type
+Pass the name of the file we want to read
+eg:
+
+```
+let readStream = fs.createReadStream("./test.html", { encoding: "utf-8" });
+createReadStream(fileName) // this will read the fileName in CRS mode
+```
+
+We can use pipe to send this read data as it/ reading happens - createReadStream(fileName).pipe(res); // write to response
+
+```
+readStream.on("data", (chunk) => {
+  console.log("Small data received");
+  console.log(chunk);
+  writeStream.write("\n New Chunk data read \n");
+  writeStream.write(chunk);
+});
+```
+
+here we are operating(writing) the data as we read it, otherwise we have to wait until we read the entire file before writing
+like:
+
+```
+response = ""
+ res.on("data", (data) => {
+    response += data; // we have to wait until the res is completely in response before we can write it to a file
+    fs.writeFile("./path", response, (err) => {})
+});
+```
+
+To operate on a file which is still receiving data/ the data is being written on it, use createWriteStream -
+make that file use createWriteStream type
+pass to it the filename
+
+eg:
+
+```
+let writestream = fs.createWriteStream("./test.html");
+writestream.write(res);
+```
+
+we are writing the response to that file using writeStream, instead of writeFile/writeFileSync
